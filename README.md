@@ -32,7 +32,7 @@ Installing the operation is as simple as booting to an Ubuntu installed USB and 
 
 You can use anything from a flash USB to an internal hard drive. In my case, I have used an **external USB 3.0 hard drive** to install the operating system for better W/R speed compared to flash USB.
 
-*** Step 2: Update & upgrade packages***
+***Step 2: Update & upgrade packages***
 
 Keep the system up to date by running the following commands:
 
@@ -41,7 +41,7 @@ sudo apt-get update
 sudo apt-get upgrade -y
 ```
 
-*** Step 3: Prepare for Nvidia CUDA toolkit & driver installation***
+***Step 3: Prepare for Nvidia CUDA toolkit & driver installation***
 
 Disable nouveau by adding a configuration at `/etc/modprobe.d/blacklist-nouveau.conf`:
 
@@ -52,7 +52,7 @@ options nouveau modeset=0
 
 Once you have added configuration file **reboot** the system. 
 
-*** Step 4: Install Nvidia Drivers & Nvidia CUDA***
+***Step 4: Install Nvidia Drivers & Nvidia CUDA***
 
 The Linux Nvidia CUDA downloaded `.run` file is packaged with a Nvidia Driver ready for installation with Nvidia CUDA.
 
