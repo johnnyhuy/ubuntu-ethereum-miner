@@ -100,13 +100,28 @@ This is a brief example of what should be inputted into the prompts to successfu
 
 **Extract** the downloaded contents to a desired location on the system. In my case, I have extracted the files at `~/claymore` or `/home/[USER]/claymore`
 
-I will be using **Nanopool** as an example mining pool so the pool and wallet address may vary depending on the pool. **Change directory** to the extracted files and **run** the miner with the following command:
+I will be using **Nanopool** as an example mining pool so the pool and wallet address may vary depending on the pool. Create a script to **run** the miner:
 
 ```shell
-./ethdcrminer64 -epool [POOL] -ewal [ETH WALLET ADDR].[WORKER NAME]/[EMAIL] -epsw x -mode 1 -ftime 10
+#!/bin/bash
+~/claymore/ethdcrminer64 -epool [POOL] -ewal [ETH WALLET ADDR].[WORKER NAME]/[EMAIL] -epsw x -mode 1 -ftime 10
 ```
 
-**Create a script** within the folder to run the miner. I have named the script `miner.sh` for later use with crontab jobs.
+I have named the script `miner.sh` at `~/` for later use with crontab jobs.
+
+### Step 7: Launch Miner at Boot
+
+To edit crontab jobs run the following command:
+
+```shell
+crontab -e
+```
+
+Add the following command to run the miner:
+
+```shell
+@reboot sleep 3 && screen -dmS claymore sh ~/miner.sh
+```
 
 ## Overclocking
 
@@ -159,6 +174,20 @@ nvidia-settings -a [gpu:1]/GPUMemoryTransferRateOffset[2]=$memoryOffset
 ```
 
 The example script above shows a 2 GPU setup where **0 and 1 are GPU index numbers**. More can be added as long as `/etc/X11/xorg.conf` is updated by running the command from step: 1 upload Nvidia overclocking.
+
+### Step 3: Launch Overclock Settings at Boot
+
+Make sure you execute the `crontab -e` as root with `sudo` since overclock settings can only be changed under root. To edit crontab jobs run the following command:
+
+```shell
+sudo crontab -e
+```
+
+Add 30 second delay to script in case overclock settings is unstable. Add the following command to run the overclock script:
+
+```shell
+@reboot sleep 30 && sh ~/overclock.sh
+```
 
 ## Troubleshooting
 
