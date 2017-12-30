@@ -191,7 +191,27 @@ Add 30 second delay to script in case overclock settings is unstable. Add the fo
 
 ## Troubleshooting
 
-Here are some solutions to some issues that may occur when setting up the system.
+Here are some solutions to some issues/gotchas that may occur when setting up the system.
+
+### How do I see if screen terminal is running
+
+Run the following command to view all screen instances:
+
+```shell
+screen -ls
+```
+
+### How do I view a screen instance
+
+To access a terminal instance from screen, run the following command:
+
+```shell
+screen -x [SCREEN NAME]
+```
+
+Replace square brackets with relevant information.
+
+To exit out of an instance press `CTRL+A+D` to exit without closing the terminal instance.
 
 ### Wifi is not connecting at login
 
