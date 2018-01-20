@@ -221,6 +221,14 @@ Allow the network to be connected by all users. The UI method will need you to g
 
 ### Failed to connect to Mir on GPU overclock
 
+When there is no Xorg server attached to the devices the following error appears when running `nvidia-settings` commands.
+
+```shell
+Failed to connect to Mir: Failed to connect to server socket: No such file or directory.
+```
+
+Make sure the Grub configuration is not set to `runlevel 3` (text mode). To see if Xorg is running on GPUs, run `nvidia-smi` and under each GPU there should be a process called `/usr/lib/xorg/Xorg`.
+
 Add the following enviroment variables in your overclock script to fix the issue:
 
 ```shell
