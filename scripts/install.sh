@@ -40,7 +40,7 @@ apt-get install git vim screen openssh-server -y
 
 echo -e "${YELLOW}\nDisabling nouveau${RESET}"
 touch '/etc/modprobe.d/blacklist-nouveau.conf'
-echo -e "blacklist nouveau\noptions nouveau modeset=0" >> /etc/modprobe.d/blacklist-nouveau.conf
+echo -e "blacklist nouveau\noptions nouveau modeset=0" > /etc/modprobe.d/blacklist-nouveau.conf
 
 echo -e "${YELLOW}\nInstalling Nvidia drivers${RESET}"
 apt-get install nvidia-390 -y
