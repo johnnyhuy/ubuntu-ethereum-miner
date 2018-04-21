@@ -23,7 +23,7 @@ git clone --depth=1 https://github.com/johnnyhuy/ubuntu-ethereum-miner.git ~/min
 3. Run the install bash script
 
 ```
-sudo bash ~/miner-installer/scripts/install.sh
+cd ~ && sudo bash ~/miner-installer/scripts/install.sh
 ```
 
 ## Option B) Manual Installation
