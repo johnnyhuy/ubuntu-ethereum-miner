@@ -29,7 +29,7 @@ echo "${YELLOW}Running this script in root/sudo"
 echo "${YELLOW}\nUpdating/Upgrading Ubuntu packages"
 add-apt-repository ppa:graphics-drivers/ppa -y
 apt-get update
-apt-get upgrade -y
+# apt-get upgrade -y
 
 echo "${YELLOW}\nInstalling Ubuntu utilities (git, vim etc.)"
 apt-get install git vim screen openssh-server -y
