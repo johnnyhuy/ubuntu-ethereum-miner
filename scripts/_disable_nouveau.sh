@@ -11,6 +11,5 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 WHITE='\033[0;37m'
 
-echo -e "${YELLOW}\nDisabling nouveau${RESET}"
 touch '/etc/modprobe.d/blacklist-nouveau.conf'
 echo -e "blacklist nouveau\noptions nouveau modeset=0" > /etc/modprobe.d/blacklist-nouveau.conf
