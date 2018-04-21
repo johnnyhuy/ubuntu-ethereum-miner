@@ -19,10 +19,10 @@ if [[ $EUID > 0 ]]; then
     exit 1
 fi
 
-echo $WELCOME_MESSAGE
-echo "${YELLOW}Running this script in root/sudo"
+echo -e $WELCOME_MESSAGE
+echo -e "${YELLOW}Running this script in root/sudo"
 
-echo "\nCopying overclock template to ~/overclock.sh"
+echo -e "\nCopying overclock template to ~/overclock.sh"
 touch ~/overclock.sh
 ~/overclock.sh << __EOF__
 #!/bin/bash
@@ -53,4 +53,4 @@ nvidia-settings -a [gpu:0]/GPUMemoryTransferRateOffset[2]=$MEMORY_OFFSET
 
 __EOF__
 
-echo "${GREEN}\nOverclock transfer complete, please re-configure script at ~/overclock.sh to reflect your GPU configuration"
+echo -e "${GREEN}\nOverclock transfer complete, please re-configure script at ~/overclock.sh to reflect your GPU configuration"

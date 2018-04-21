@@ -36,7 +36,7 @@ apt-get install git vim screen openssh-server -y
 
 echo -e "${YELLOW}\nDisabling nouveau"
 touch '/etc/modprobe.d/blacklist-nouveau.conf'
-echo "blacklist nouveau\noptions nouveau modeset=0" >> /etc/modprobe.d/blacklist-nouveau.conf
+echo -e "blacklist nouveau\noptions nouveau modeset=0" >> /etc/modprobe.d/blacklist-nouveau.conf
 
 echo -e "${YELLOW}\nInstalling Nvidia drivers"
 apt-get install nvidia-390
@@ -45,7 +45,7 @@ echo -e "${YELLOW}\nUnlocking Nvidia overclocking setting"
 nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration
 
 echo -e "${YELLOW}\nInstalling Claymore Miner to ~/claymore"
-echo "#!/bin/bash\n~/claymore/ethdcrminer64 -epool [POOL] -ewal [ETH WALLET ADDR].[WORKER NAME]/[EMAIL] -epsw x -mode 1 -ftime 10" >> ~/miner.sh
+echo -e "#!/bin/bash\n~/claymore/ethdcrminer64 -epool [POOL] -ewal [ETH WALLET ADDR].[WORKER NAME]/[EMAIL] -epsw x -mode 1 -ftime 10" >> ~/miner.sh
 gunzip "./${CLAYMORE_MINER_GZIP}.gz"
 mv $CLAYMORE_MINER_GZIP ~/claymore
 
@@ -55,8 +55,8 @@ touch ~/miner.sh
 
 echo -e "${YELLOW}\nCreating crontab to start miner at boot"
 crontab -l ~/.cron
-echo "@reboot sleep ${MINER_COOLDOWN} && screen -dmS claymore sh ~/miner.sh" >> ~/.cron
-echo "@reboot sleep ${OVERCLOCK_COOLDOWN} && sh ~/overclock.sh" >> ~/.cron
+echo -e "@reboot sleep ${MINER_COOLDOWN} && screen -dmS claymore sh ~/miner.sh" >> ~/.cron
+echo -e "@reboot sleep ${OVERCLOCK_COOLDOWN} && sh ~/overclock.sh" >> ~/.cron
 crontab ~/.cron
 rm ~/.cron
 

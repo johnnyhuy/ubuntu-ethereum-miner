@@ -19,12 +19,12 @@ if [[ $EUID > 0 ]]; then
     exit 1
 fi
 
-echo $WELCOME_MESSAGE
-echo "${YELLOW}Running this script in root/sudo"
+echo -e $WELCOME_MESSAGE
+echo -e "${YELLOW}Running this script in root/sudo"
 
-echo "\nUnlocking"
+echo -e "\nUnlocking"
 nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration
 
-echo "${GREEN}\nUnlock complete, restarting in 5 seconds (manual reboot if required)"
+echo -e "${GREEN}\nUnlock complete, restarting in 5 seconds (manual reboot if required)"
 
 @sleep 5 reboot
