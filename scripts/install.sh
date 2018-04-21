@@ -26,35 +26,34 @@ fi
 echo $WELCOME_MESSAGE
 echo "${YELLOW}Running this script in root/sudo"
 
-echo "\nUpdating/Upgrading Ubunutu packages"
+echo "${YELLOW}\nUpdating/Upgrading Ubuntu packages"
+add-apt-repository ppa:graphics-drivers/ppa -y
 apt-get update
 apt-get upgrade -y
 
-echo "\nInstalling Ubuntu utilities (git, vim etc.)"
+echo "${YELLOW}\nInstalling Ubuntu utilities (git, vim etc.)"
 apt-get install git vim screen openssh-server -y
 
-echo "\nDisabling nouveau"
+echo "${YELLOW}\nDisabling nouveau"
 touch '/etc/modprobe.d/blacklist-nouveau.conf'
 echo "blacklist nouveau\noptions nouveau modeset=0" >> /etc/modprobe.d/blacklist-nouveau.conf
 
-echo "\nInstalling Nvidia drivers"
-add-apt-repository ppa:graphics-drivers/ppa -y
-apt-get update
+echo "${YELLOW}\nInstalling Nvidia drivers"
 apt-get install nvidia-390
 
-echo "\nUnlocking Nvidia overclocking setting"
+echo "${YELLOW}\nUnlocking Nvidia overclocking setting"
 nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration
 
-echo "\nInstalling Claymore Miner to ~/claymore"
+echo "${YELLOW}\nInstalling Claymore Miner to ~/claymore"
 echo "#!/bin/bash\n~/claymore/ethdcrminer64 -epool [POOL] -ewal [ETH WALLET ADDR].[WORKER NAME]/[EMAIL] -epsw x -mode 1 -ftime 10" >> ~/miner.sh
 gunzip "./${CLAYMORE_MINER_GZIP}.gz"
 mv $CLAYMORE_MINER_GZIP ~/claymore
 
-echo "\nCopying template miner start script"
+echo "${YELLOW}\nCopying template miner start script"
 echo "${WHITE}WARNING: Change to appropriate miner settings after you run this script${YELLOW}"
 touch ~/miner.sh
 
-echo "\nCreating crontab to start miner at boot"
+echo "${YELLOW}\nCreating crontab to start miner at boot"
 crontab -l ~/.cron
 echo "@reboot sleep ${MINER_COOLDOWN} && screen -dmS claymore sh ~/miner.sh" >> ~/.cron
 echo "@reboot sleep ${OVERCLOCK_COOLDOWN} && sh ~/overclock.sh" >> ~/.cron
