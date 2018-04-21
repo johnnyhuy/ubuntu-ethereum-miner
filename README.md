@@ -3,9 +3,13 @@ The following steps will guide you to setup an Ubuntu operating system. This wil
 
 ## Disclaimers
 
-I am not the creator of Claymore's Miner (miner zip stored in /miner/*.gz). This is an installation guide to install an Nvidia miner and I will not be responsible/liable for any damages once in use.
+I am not the creator of Claymore's Miner (miner zip stored in /miner/*.gz).
+
+This is an installation guide to install an Nvidia miner and I will not be responsible/liable for any damages once in use.
 
 ## Option A) Automated Installation
+
+This script requires **root** to update/create files and configure Nvidia drivers.
 
 1. Gain access to your Ubuntu instance
 
@@ -219,6 +223,14 @@ Add 30 second delay to script in case overclock settings is unstable. Add the fo
 ### Troubleshooting
 
 Here are some solutions to some issues/gotchas that may occur when setting up the system.
+
+#### Reset files from installation script
+
+If you need a clean installation of files from the installation script, run the following command:
+
+```shell
+cd ~ && sudo bash ./miner-installer/scripts/reset.sh
+```
 
 #### How do I see if screen terminal is running
 
