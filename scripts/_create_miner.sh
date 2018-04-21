@@ -16,7 +16,7 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 WHITE='\033[0;37m'
 
-mkdir -p "${MINER_INSTALLER_DIR}"
+mkdir -p "${MINER_INSTALLER_DIR}/claymore_extract"
 tar xvzf "${MINER_INSTALLER_DIR}/miner/${CLAYMORE_MINER_GZIP}.gz" -C claymore_extract --strip-components 1
 mkdir -p $CLAYMORE_DIR
 mv "${MINER_INSTALLER_DIR}/claymore_extract" $CLAYMORE_DIR
