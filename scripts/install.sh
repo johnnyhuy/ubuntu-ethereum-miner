@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Config
-CLAYMORE_MINER_GZIP='claymore_11.6._quickfix'
+CLAYMORE_MINER_GZIP='claymore_11.6_quickfix'
 CLAYMORE_DIR='~/claymore'
 OVERCLOCK_START_SCRIPT='~/overclock.sh'
 MINER_INSTALLER_DIR='~/miner-installer'
@@ -60,22 +60,17 @@ apt-get update
 echo -e "${YELLOW}\nInstalling Ubuntu utilities (git, vim etc.)${RESET}"
 apt-get install git vim screen openssh-server -y
 
-echo -e "${YELLOW}\nDisabling nouveau${RESET}"
-touch '/etc/modprobe.d/blacklist-nouveau.conf'
-echo -e "blacklist nouveau\noptions nouveau modeset=0" > /etc/modprobe.d/blacklist-nouveau.conf
-
 echo -e "${YELLOW}\nInstalling Nvidia drivers${RESET}"
 apt-get install nvidia-390 -y
 
-echo -e "${YELLOW}\nUnlocking Nvidia overclocking setting${RESET}"
+echo -e "${YELLOW}\nDisabling nouveau${RESET}"
+bash "${MINER_INSTALLER_DIR}/scripts/_disable_nouveau.sh"
 
-bash "$MINER_INSTALLER_DIR/scripts/_nvidia_overclock.sh"
+echo -e "${YELLOW}\nCopying overclock template to ${OVERCLOCK_START_SCRIPT}${RESET}"
+bash "${MINER_INSTALLER_DIR}/scripts/_create_cron_job.sh" $MINER_COOLDOWN $MINER_START_SCRIPT $OVERCLOCK_COOLDOWN $OVERCLOCK_START_SCRIPT
 
 echo -e "${YELLOW}\nInstalling Claymore Miner to ${CLAYMORE_DIR}${RESET}"
-mkdir "${MINER_INSTALLER_DIR}/claymore_extract"
-tar xvzf "${MINER_INSTALLER_DIR}/${CLAYMORE_MINER_GZIP}.gz" -C claymore_extract --strip-components 1
-mkdir $CLAYMORE_DIR
-mv "${MINER_INSTALLER_DIR}/claymore_extract" $CLAYMORE_DIR
+bash "${MINER_INSTALLER_DIR}/scripts/_create_miner.sh" $MINER_INSTALLER_DIR $CLAYMORE_MINER_GZIP $CLAYMORE_DIR
 
 echo -e "${YELLOW}\nCopying template miner start script${RESET}"
 echo -e "${BLUE}Change to appropriate miner settings after you run this script${RESET}"
@@ -83,12 +78,7 @@ touch $MINER_START_SCRIPT
 echo -e "#!/bin/bash\n${CLAYMORE_DIR}/ethdcrminer64 -epool [POOL] -ewal [ETH WALLET ADDR].[WORKER NAME]/[EMAIL] -epsw x -mode 1 -ftime 10" >> ${MINER_START_SCRIPT}
 
 echo -e "${YELLOW}\nCreating crontab to start miner at boot${RESET}"
-crontab -l > ~/temp_cron
-echo -e "@reboot nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration" >> ~/temp_cron
-echo -e "@reboot sleep ${MINER_COOLDOWN} && screen -dmS claymore sh ${MINER_START_SCRIPT}" >> ~/temp_cron
-echo -e "@reboot sleep ${OVERCLOCK_COOLDOWN} && sh ${OVERCLOCK_START_SCRIPT}" >> ~/temp_cron
-crontab ~/temp_cron
-rm ~/temp_cron
+bash "${MINER_INSTALLER_DIR}/scripts/_create_cron_job.sh"
 
 echo -e "${GREEN}\nInstallation complete, restarting in 5 seconds (manual reboot if required)${RESET}"
 

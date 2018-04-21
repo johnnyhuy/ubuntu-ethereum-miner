@@ -14,7 +14,6 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 WHITE='\033[0;37m'
 
-echo -e "${YELLOW}\nCopying overclock template to ${OVERCLOCK_START_SCRIPT}${RESET}"
 rm -f $OVERCLOCK_START_SCRIPT
 touch $OVERCLOCK_START_SCRIPT
 echo -e"#!/bin/bash
