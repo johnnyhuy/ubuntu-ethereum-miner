@@ -23,10 +23,10 @@ echo -e $WELCOME_MESSAGE
 echo -e "${YELLOW}Running this script in root/sudo${RESET}"
 
 echo -e "${GREEN}\nThis reset script will remove the following:
-    \n/etc/modprobe.d/blacklist-nouveau.conf
-    \n~/claymore/
-    \n~/miner.sh
-    \n~/overclock.sh${YELLOW}"
+/etc/modprobe.d/blacklist-nouveau.conf
+~/claymore/
+~/miner.sh
+~/overclock.sh${YELLOW}"
 read -e -n 1 -r -p "Confirm [y/N] " INPUT
 case $INPUT in
     [yY])
