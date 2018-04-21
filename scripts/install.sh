@@ -2,6 +2,8 @@
 
 # Config
 CLAYMORE_MINER_GZIP='claymore_11.6._quickfix'
+CLAYMORE_DIR='~/claymore'
+MINER_INSTALLER_DIR='~/miner-installer'
 MINER_COOLDOWN=15
 MINER_COOLDOWN=30
 WELCOME_MESSAGE="${CYAN}Welcome to the johnnyhuy/ubuntu-etheruem-miner installer${RESET}"
@@ -44,14 +46,16 @@ apt-get install nvidia-390
 echo -e "${YELLOW}\nUnlocking Nvidia overclocking setting"
 nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration
 
-echo -e "${YELLOW}\nInstalling Claymore Miner to ~/claymore"
-echo -e "#!/bin/bash\n~/claymore/ethdcrminer64 -epool [POOL] -ewal [ETH WALLET ADDR].[WORKER NAME]/[EMAIL] -epsw x -mode 1 -ftime 10" >> ~/miner.sh
-gunzip "./${CLAYMORE_MINER_GZIP}.gz"
-mv $CLAYMORE_MINER_GZIP ~/claymore
+echo -e "${YELLOW}\nInstalling Claymore Miner to ${CLAYMORE_DIR}"
+mkdir "${MINER_INSTALLER_DIR}/claymore_extract"
+tar xvzf "${MINER_INSTALLER_DIR}/${CLAYMORE_MINER_GZIP}.gz" -C claymore_extract --strip-components 1
+mkdir $CLAYMORE_DIR
+mv "${MINER_INSTALLER_DIR}/claymore_extract" $CLAYMORE_DIR
 
 echo -e "${YELLOW}\nCopying template miner start script"
 echo -e "${WHITE}WARNING: Change to appropriate miner settings after you run this script${YELLOW}"
 touch ~/miner.sh
+echo -e "#!/bin/bash\n${CLAYMORE_DIR}/ethdcrminer64 -epool [POOL] -ewal [ETH WALLET ADDR].[WORKER NAME]/[EMAIL] -epsw x -mode 1 -ftime 10" >> ~/miner.sh
 
 echo -e "${YELLOW}\nCreating crontab to start miner at boot"
 crontab -l ~/.cron
