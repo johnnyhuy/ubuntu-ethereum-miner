@@ -44,4 +44,4 @@ do
     esac
 done
 
-rm -rdf /etc/modprobe.d/blacklist-nouveau.conf ~/claymore/ ~/miner.sh ~/overclock.sh
+rm -rdf /etc/modprobe.d/blacklist-nouveau.conf ./claymore/ ./miner.sh ./overclock.sh
