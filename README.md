@@ -9,7 +9,7 @@ This is an installation guide to install an Nvidia miner and I will not be respo
 
 ## Option A) Automated Installation
 
-This script requires **root** to update/create files and configure Nvidia drivers.
+This script requires **root** to update/create files and configure Nvidia drivers. This method also assumes that you have a **fresh** installation of Ubuntu LTS.
 
 1. Gain access to your Ubuntu instance
 
