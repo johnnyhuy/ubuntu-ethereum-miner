@@ -26,19 +26,22 @@ echo -e "${GREEN}\nThis reset script will remove the following:
 /etc/modprobe.d/blacklist-nouveau.conf
 ~/claymore/
 ~/miner.sh
-~/overclock.sh${YELLOW}"
-read -e -n 1 -r -p "Confirm [y/N] " INPUT
-case $INPUT in
-    [yY])
-    break
-    ;;
-    [nN]|"")
-    echo -e "${RED}Installation aborted!${RESET}"
-    exit 1
-    ;;
-    *)
-    echo -e "${RED}Please choose y or n.${RESET}"
-    ;;
-esac
+~/overclock.sh\n${RESET}"
+while :
+do
+    read -e -n 1 -r -p "Confirm [y/N] " INPUT
+    case $INPUT in
+        [yY])
+        break
+        ;;
+        [nN]|"")
+        echo -e "${RED}Installation aborted!${RESET}"
+        exit 1
+        ;;
+        *)
+        echo -e "${RED}Please choose y or n.${RESET}"
+        ;;
+    esac
+done
 
 rm -rdf /etc/modprobe.d/blacklist-nouveau.conf ~/claymore/ ~/miner.sh ~/overclock.sh

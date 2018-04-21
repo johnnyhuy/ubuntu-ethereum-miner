@@ -37,21 +37,23 @@ echo -e "Install Nvidia drivers: installs package nvidia-390"
 echo -e "Unlock Nvidia overclock settings: runs nvidia-xconfig"
 echo -e "Create overclock script: added script at ~/overclock.sh"
 echo -e "Create miner start script: added script at ~/miner.sh"
-echo -e "Create cron job: starts miner and overclock at reboot\n${YELLOW}"
-read -e -n 1 -r -p "Confirm [y/N] " INPUT
-case $INPUT in
-    [yY])
-    break
-    ;;
-    [nN]|"")
-    echo -e "${RED}Installation aborted!${RESET}"
-    exit 1
-    ;;
-    *)
-    echo -e "${RED}Please choose y or n.${RESET}"
-    ;;
-esac
-
+echo -e "Create cron job: starts miner and overclock at reboot\n${RESET}"
+while :
+do
+    read -e -n 1 -r -p "Confirm [y/N] " INPUT
+    case $INPUT in
+        [yY])
+        break
+        ;;
+        [nN]|"")
+        echo -e "${RED}Installation aborted!${RESET}"
+        exit 1
+        ;;
+        *)
+        echo -e "${RED}Please choose y or n.${RESET}"
+        ;;
+    esac
+done
 echo -e "${YELLOW}\nUpdating/Upgrading Ubuntu packages${RESET}"
 add-apt-repository ppa:graphics-drivers/ppa -y
 apt-get update
