@@ -30,6 +30,28 @@ fi
 echo -e $WELCOME_MESSAGE
 echo -e "${YELLOW}Running this script in root/sudo${RESET}"
 
+echo -e "${GREEN}\nThis installation script will do the following:"
+echo -e "Install Ubuntu utility packages: git vim screen openssh-server"
+echo -e "Disable nouveau: adds config at /etc/modprobe.d/blacklist-nouveau.conf"
+echo -e "Install Nvidia drivers: installs package nvidia-390"
+echo -e "Unlock Nvidia overclock settings: runs nvidia-xconfig"
+echo -e "Create overclock script: added script at ~/overclock.sh"
+echo -e "Create miner start script: added script at ~/miner.sh"
+echo -e "Create cron job: starts miner and overclock at reboot\n${YELLOW}"
+read -e -n 1 -r -p "Confirm [y/N] " INPUT
+case $INPUT in
+    [yY])
+    break
+    ;;
+    [nN]|"")
+    echo -e "${RED}Installation aborted!${RESET}"
+    exit 1
+    ;;
+    *)
+    echo -e "${RED}Please choose y or n.${RESET}"
+    ;;
+esac
+
 echo -e "${YELLOW}\nUpdating/Upgrading Ubuntu packages${RESET}"
 add-apt-repository ppa:graphics-drivers/ppa -y
 apt-get update
@@ -49,27 +71,22 @@ echo -e "${YELLOW}\nUnlocking Nvidia overclocking setting${RESET}"
 nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration
 
 echo -e "${YELLOW}\nCopying overclock template to ${OVERCLOCK_START_SCRIPT}${RESET}"
+rm -f $OVERCLOCK_START_SCRIPT
 touch $OVERCLOCK_START_SCRIPT
-
 echo "#!/bin/bash" >> $OVERCLOCK_START_SCRIPT
-
 echo -e "\nexport DISPLAY=0" >> $OVERCLOCK_START_SCRIPT
 echo -e "export XAUTHORITY=/var/run/lightdm/root/:0" >> $OVERCLOCK_START_SCRIPT
-
 echo -e "\n# Memory clock" >> $OVERCLOCK_START_SCRIPT
 echo -e "# This setting is optional if you want to keep all your overclock settings the same" >> $OVERCLOCK_START_SCRIPT
 echo -e "MEMORY_OFFSET=\"300\"" >> $OVERCLOCK_START_SCRIPT
-
 echo -e "\n# Enable persistent on device" >> $OVERCLOCK_START_SCRIPT
 echo -e "# To add another GPU, append the ID with a common on the same line" >> $OVERCLOCK_START_SCRIPT
 echo -e "# nvidia-smi -pm [XORG DEVICE # (e.g. 1,2,3)]" >> $OVERCLOCK_START_SCRIPT
 echo -e "nvidia-smi -pm 1" >> $OVERCLOCK_START_SCRIPT
-
 echo -e "\n# Power limit" >> $OVERCLOCK_START_SCRIPT
 echo -e "# To add another GPU, append the ID with a common on the same line" >> $OVERCLOCK_START_SCRIPT
 echo -e "# nvidia-smi -i [XORG DEVICE # (e.g. 1,2,3)] [POWER LIMIT (watt != percent)]" >> $OVERCLOCK_START_SCRIPT
 echo -e "nvidia-smi -i 0 -pl 80" >> $OVERCLOCK_START_SCRIPT
-
 echo -e "\n# Apply overclocking settings to each GPU" >> $OVERCLOCK_START_SCRIPT
 echo -e "# To add another GPU, duplicate the two active lines and set the Xorg device ID accordingly" >> $OVERCLOCK_START_SCRIPT
 echo -e "# nvidia-settings -a [gpu:[XORG DEVICE # (e.g. 1,2,3)]]/GpuPowerMizerMode=1" >> $OVERCLOCK_START_SCRIPT
