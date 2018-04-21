@@ -1,15 +1,26 @@
 # Welcome!
 The following steps will guide you to setup an Ubuntu operating system. This will have portability mind to run the operating system on a **USB** with a **wifi** connection.
 
-## Installation
+## Disclaimers
 
-1. Get this Git repository
+I am not the creator of Claymore's Miner (miner zip stored in /miner/*.gz), this is an installation script to install an Nvidia miner.
+
+## Automated Installation
+
+1. Gain access to your Ubuntu instance
+
+Be sure to have the following prerequisites:
+
+- Git installed
+- An Internet connection on the device
+
+2. Get this Git repository
 
 ```
 git clone --depth=1 https://github.com/johnnyhuy/ubuntu-ethereum-miner.git ~/miner-installer
 ```
 
-2. Run the install bash script
+3. Run the install bash script
 
 ```
 sudo ~/miner-installer/scripts/install.sh
