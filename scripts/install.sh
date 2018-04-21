@@ -43,7 +43,7 @@ touch '/etc/modprobe.d/blacklist-nouveau.conf'
 echo -e "blacklist nouveau\noptions nouveau modeset=0" >> /etc/modprobe.d/blacklist-nouveau.conf
 
 echo -e "${YELLOW}\nInstalling Nvidia drivers${RESET}"
-apt-get install nvidia-390
+apt-get install nvidia-390 -y
 
 echo -e "${YELLOW}\nUnlocking Nvidia overclocking setting${RESET}"
 nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration
