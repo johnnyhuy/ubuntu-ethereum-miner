@@ -17,7 +17,7 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 WHITE='\033[0;37m'
 
-if [ $EUID > 0 ]; then
+if [[ $EUID > 0 ]]; then
     echo -e $WELCOME_MESSAGE
     echo -e "${RED}Permission denied, please run this script in root/sudo${RESET}"
     exit 1
