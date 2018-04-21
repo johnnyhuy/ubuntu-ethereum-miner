@@ -5,7 +5,7 @@ The following steps will guide you to setup an Ubuntu operating system. This wil
 
 I am not the creator of Claymore's Miner (miner zip stored in /miner/*.gz), this is an installation guide to install an Nvidia miner.
 
-## Automated Installation
+## Option A) Automated Installation
 
 1. Gain access to your Ubuntu instance
 
@@ -26,7 +26,7 @@ git clone --depth=1 https://github.com/johnnyhuy/ubuntu-ethereum-miner.git ~/min
 sudo ~/miner-installer/scripts/install.sh
 ```
 
-## Manual Instructions
+## Option B) Manual Installation
 
 ### Features
 
