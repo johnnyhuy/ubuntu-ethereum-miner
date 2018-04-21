@@ -12,7 +12,7 @@ git clone --depth=1 https://github.com/johnnyhuy/ubuntu-ethereum-miner.git ~/min
 2. Run the install bash script
 
 ```
-sudo ~/miner-installer/install.sh
+sudo ~/miner-installer/scripts/install.sh
 ```
 
 ## Manual Instructions
@@ -22,7 +22,7 @@ sudo ~/miner-installer/install.sh
 I have tried my best to keep things as simple as possible with only the most useful packages installed on top of the base operating system. Downloads/Documentation are provided in the list below.
 
 - Ubuntu 16.04.3 LTS [Download page](https://www.ubuntu.com/download/desktop)
-- Claymore's Dual Miner [Thread post](https://bitcointalk.org/index.php?topic=1433925.0)
+- Claymore's Dual Miner v11.6 Quick Fix [Thread post](https://bitcointalk.org/index.php?topic=1433925.0)
 - Screen [Documentation](https://help.ubuntu.com/community/Screen)
 - OpenSSHServer [Documentation](https://help.ubuntu.com/lts/serverguide/openssh-server.html)
 - Nvidia CUDA & Nvidia Video Driver [Download](https://developer.nvidia.com/cuda-downloads?target_os=Linux)

@@ -1,9 +1,10 @@
- #!/bin/bash
+#!/bin/bash
 
- # Reset
-RESET='\033[0m'       # Text Reset
+# Config
+WELCOME_MESSAGE="${CYAN}Welcome to the Nvidia overclock unlocker${RESET}"
 
-# Regular Colors
+# Colors
+RESET='\033[0m'
 BLACK='\033[0;30m'
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -11,9 +12,6 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
-WHITE='\033[0;37m'
-
-WELCOME_MESSAGE="${CYAN}Welcome to the johnnyhuy/ubuntu-etheruem-miner installer${RESET}"
 
 if [[ $EUID > 0 ]]; then
     echo -e $WELCOME_MESSAGE
@@ -24,9 +22,9 @@ fi
 echo $WELCOME_MESSAGE
 echo "${YELLOW}Running this script in root/sudo"
 
-echo "\nUpdating/Upgrading Ubunutu packages"
-apt-get update
-apt-get upgrade -y
+echo "\nUnlocking"
+nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration
 
-echo "\nInstalling Ubuntu utilities (git, vim etc.)"
-apt-get install git vim -y
+echo "${GREEN}\nUnlock complete, restarting in 5 seconds (manual reboot if required)"
+
+@sleep 5 reboot
