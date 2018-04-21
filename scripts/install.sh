@@ -28,27 +28,27 @@ if [[ $EUID > 0 ]]; then
 fi
 
 echo -e $WELCOME_MESSAGE
-echo -e "${YELLOW}Running this script in root/sudo"
+echo -e "${YELLOW}Running this script in root/sudo${RESET}"
 
-echo -e "${YELLOW}\nUpdating/Upgrading Ubuntu packages"
+echo -e "${YELLOW}\nUpdating/Upgrading Ubuntu packages${RESET}"
 add-apt-repository ppa:graphics-drivers/ppa -y
 apt-get update
 # apt-get upgrade -y
 
-echo -e "${YELLOW}\nInstalling Ubuntu utilities (git, vim etc.)"
+echo -e "${YELLOW}\nInstalling Ubuntu utilities (git, vim etc.)${RESET}"
 apt-get install git vim screen openssh-server -y
 
-echo -e "${YELLOW}\nDisabling nouveau"
+echo -e "${YELLOW}\nDisabling nouveau${RESET}"
 touch '/etc/modprobe.d/blacklist-nouveau.conf'
 echo -e "blacklist nouveau\noptions nouveau modeset=0" >> /etc/modprobe.d/blacklist-nouveau.conf
 
-echo -e "${YELLOW}\nInstalling Nvidia drivers"
+echo -e "${YELLOW}\nInstalling Nvidia drivers${RESET}"
 apt-get install nvidia-390
 
-echo -e "${YELLOW}\nUnlocking Nvidia overclocking setting"
+echo -e "${YELLOW}\nUnlocking Nvidia overclocking setting${RESET}"
 nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration
 
-echo -e "\nCopying overclock template to ${OVERCLOCK_START_SCRIPT}"
+echo -e "${YELLOW}\nCopying overclock template to ${OVERCLOCK_START_SCRIPT}${RESET}"
 touch $OVERCLOCK_START_SCRIPT
 
 echo "#!/bin/bash" >> $OVERCLOCK_START_SCRIPT
@@ -77,24 +77,24 @@ echo -e "# nvidia-settings -a [gpu:[XORG DEVICE # (e.g. 1,2,3)]]/GPUMemoryTransf
 echo -e "nvidia-settings -a [gpu:0]/GpuPowerMizerMode=1" >> $OVERCLOCK_START_SCRIPT
 echo -e "nvidia-settings -a [gpu:0]/GPUMemoryTransferRateOffset[2]=$MEMORY_OFFSET" >> $OVERCLOCK_START_SCRIPT
 
-echo -e "${YELLOW}\nInstalling Claymore Miner to ${CLAYMORE_DIR}"
+echo -e "${YELLOW}\nInstalling Claymore Miner to ${CLAYMORE_DIR}${RESET}"
 mkdir "${MINER_INSTALLER_DIR}/claymore_extract"
 tar xvzf "${MINER_INSTALLER_DIR}/${CLAYMORE_MINER_GZIP}.gz" -C claymore_extract --strip-components 1
 mkdir $CLAYMORE_DIR
 mv "${MINER_INSTALLER_DIR}/claymore_extract" $CLAYMORE_DIR
 
-echo -e "${YELLOW}\nCopying template miner start script"
-echo -e "${WHITE}WARNING: Change to appropriate miner settings after you run this script${YELLOW}"
+echo -e "${YELLOW}\nCopying template miner start script${RESET}"
+echo -e "${WHITE}WARNING: Change to appropriate miner settings after you run this script${RESET}"
 touch $MINER_START_SCRIPT
 echo -e "#!/bin/bash\n${CLAYMORE_DIR}/ethdcrminer64 -epool [POOL] -ewal [ETH WALLET ADDR].[WORKER NAME]/[EMAIL] -epsw x -mode 1 -ftime 10" >> ${MINER_START_SCRIPT}
 
-echo -e "${YELLOW}\nCreating crontab to start miner at boot"
+echo -e "${YELLOW}\nCreating crontab to start miner at boot${RESET}"
 crontab -l ~/temp_cron
 echo -e "@reboot sleep ${MINER_COOLDOWN} && screen -dmS claymore sh ${MINER_START_SCRIPT}" >> ~/temp_cron
 echo -e "@reboot sleep ${OVERCLOCK_COOLDOWN} && sh ${OVERCLOCK_START_SCRIPT}" >> ~/temp_cron
 crontab ~/temp_cron
 rm ~/temp_cron
 
-echo -e "${GREEN}\nInstallation complete, restarting in 5 seconds (manual reboot if required)"
+echo -e "${GREEN}\nInstallation complete, restarting in 5 seconds (manual reboot if required)${RESET}"
 
 @sleep 5 reboot
