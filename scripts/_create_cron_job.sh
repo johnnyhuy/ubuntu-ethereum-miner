@@ -17,9 +17,9 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 WHITE='\033[0;37m'
 
-crontab -l > ~/temp_cron
-echo -e "@reboot nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration" >> ~/temp_cron
-echo -e "@reboot sleep ${MINER_COOLDOWN} && screen -dmS claymore sh ${MINER_START_SCRIPT}" >> ~/temp_cron
-echo -e "@reboot sleep ${OVERCLOCK_COOLDOWN} && sh ${OVERCLOCK_START_SCRIPT}" >> ~/temp_cron
-crontab ~/temp_cron
-rm ~/temp_cron
+crontab -l > ./temp_cron
+echo -e "@reboot nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration
+@reboot sleep ${MINER_COOLDOWN} && screen -dmS claymore sh ${MINER_START_SCRIPT}
+@reboot sleep ${OVERCLOCK_COOLDOWN} && sh ${OVERCLOCK_START_SCRIPT}" > ./temp_cron
+crontab ./temp_cron
+rm ./temp_cron
