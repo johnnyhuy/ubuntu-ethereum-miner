@@ -30,14 +30,14 @@ fi
 echo -e $WELCOME_MESSAGE
 echo -e "${YELLOW}Running this script in root/sudo${RESET}"
 
-echo -e "${GREEN}\nThis installation script will do the following:"
-echo -e "Install Ubuntu utility packages: git vim screen openssh-server"
-echo -e "Disable nouveau: adds config at /etc/modprobe.d/blacklist-nouveau.conf"
-echo -e "Install Nvidia drivers: installs package nvidia-390"
-echo -e "Unlock Nvidia overclock settings: runs nvidia-xconfig"
-echo -e "Create overclock script: added script at ~/overclock.sh"
-echo -e "Create miner start script: added script at ~/miner.sh"
-echo -e "Create cron job: starts miner and overclock at reboot\n${RESET}"
+echo -e "${GREEN}\nThis installation script will do the following:
+Install Ubuntu utility packages: git vim screen openssh-server
+Disable nouveau: adds config at /etc/modprobe.d/blacklist-nouveau.conf
+Install Nvidia drivers: installs package nvidia-390
+Unlock Nvidia overclock settings: runs nvidia-xconfig
+Create overclock script: added script at ~/overclock.sh
+Create miner start script: added script at ~/miner.sh
+Create cron job: starts miner and overclock at reboot\n${RESET}"
 while :
 do
     read -e -n 1 -r -p "Confirm [y/N] " INPUT
