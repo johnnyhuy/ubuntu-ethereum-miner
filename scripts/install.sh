@@ -2,10 +2,10 @@
 
 # Config
 CLAYMORE_MINER_GZIP='claymore_11.6._quickfix'
-CLAYMORE_DIR=~/claymore
-OVERCLOCK_START_SCRIPT=~/overclock.sh
-MINER_INSTALLER_DIR=~/miner-installer
-MINER_START_SCRIPT=~/miner.sh
+CLAYMORE_DIR='~/claymore'
+OVERCLOCK_START_SCRIPT='~/overclock.sh'
+MINER_INSTALLER_DIR='~/miner-installer'
+MINER_START_SCRIPT='~/miner.sh'
 MINER_COOLDOWN=15
 MINER_COOLDOWN=30
 WELCOME_MESSAGE="${CYAN}Welcome to the johnnyhuy/ubuntu-etheruem-miner installer${RESET}"
@@ -68,31 +68,8 @@ echo -e "${YELLOW}\nInstalling Nvidia drivers${RESET}"
 apt-get install nvidia-390 -y
 
 echo -e "${YELLOW}\nUnlocking Nvidia overclocking setting${RESET}"
-nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration
 
-echo -e "${YELLOW}\nCopying overclock template to ${OVERCLOCK_START_SCRIPT}${RESET}"
-rm -f $OVERCLOCK_START_SCRIPT
-touch $OVERCLOCK_START_SCRIPT
-echo "#!/bin/bash" >> $OVERCLOCK_START_SCRIPT
-echo -e "\nexport DISPLAY=0" >> $OVERCLOCK_START_SCRIPT
-echo -e "export XAUTHORITY=/var/run/lightdm/root/:0" >> $OVERCLOCK_START_SCRIPT
-echo -e "\n# Memory clock" >> $OVERCLOCK_START_SCRIPT
-echo -e "# This setting is optional if you want to keep all your overclock settings the same" >> $OVERCLOCK_START_SCRIPT
-echo -e "MEMORY_OFFSET=\"300\"" >> $OVERCLOCK_START_SCRIPT
-echo -e "\n# Enable persistent on device" >> $OVERCLOCK_START_SCRIPT
-echo -e "# To add another GPU, append the ID with a common on the same line" >> $OVERCLOCK_START_SCRIPT
-echo -e "# nvidia-smi -pm [XORG DEVICE # (e.g. 1,2,3)]" >> $OVERCLOCK_START_SCRIPT
-echo -e "nvidia-smi -pm 1" >> $OVERCLOCK_START_SCRIPT
-echo -e "\n# Power limit" >> $OVERCLOCK_START_SCRIPT
-echo -e "# To add another GPU, append the ID with a common on the same line" >> $OVERCLOCK_START_SCRIPT
-echo -e "# nvidia-smi -i [XORG DEVICE # (e.g. 1,2,3)] [POWER LIMIT (watt != percent)]" >> $OVERCLOCK_START_SCRIPT
-echo -e "nvidia-smi -i 0 -pl 80" >> $OVERCLOCK_START_SCRIPT
-echo -e "\n# Apply overclocking settings to each GPU" >> $OVERCLOCK_START_SCRIPT
-echo -e "# To add another GPU, duplicate the two active lines and set the Xorg device ID accordingly" >> $OVERCLOCK_START_SCRIPT
-echo -e "# nvidia-settings -a [gpu:[XORG DEVICE # (e.g. 1,2,3)]]/GpuPowerMizerMode=1" >> $OVERCLOCK_START_SCRIPT
-echo -e "# nvidia-settings -a [gpu:[XORG DEVICE # (e.g. 1,2,3)]]/GPUMemoryTransferRateOffset[2]=$MEMORY_OFFSET" >> $OVERCLOCK_START_SCRIPT
-echo -e "nvidia-settings -a [gpu:0]/GpuPowerMizerMode=1" >> $OVERCLOCK_START_SCRIPT
-echo -e "nvidia-settings -a [gpu:0]/GPUMemoryTransferRateOffset[2]=$MEMORY_OFFSET" >> $OVERCLOCK_START_SCRIPT
+bash "$MINER_INSTALLER_DIR/scripts/_nvidia_overclock.sh"
 
 echo -e "${YELLOW}\nInstalling Claymore Miner to ${CLAYMORE_DIR}${RESET}"
 mkdir "${MINER_INSTALLER_DIR}/claymore_extract"
@@ -101,12 +78,13 @@ mkdir $CLAYMORE_DIR
 mv "${MINER_INSTALLER_DIR}/claymore_extract" $CLAYMORE_DIR
 
 echo -e "${YELLOW}\nCopying template miner start script${RESET}"
-echo -e "${WHITE}WARNING: Change to appropriate miner settings after you run this script${RESET}"
+echo -e "${BLUE}Change to appropriate miner settings after you run this script${RESET}"
 touch $MINER_START_SCRIPT
 echo -e "#!/bin/bash\n${CLAYMORE_DIR}/ethdcrminer64 -epool [POOL] -ewal [ETH WALLET ADDR].[WORKER NAME]/[EMAIL] -epsw x -mode 1 -ftime 10" >> ${MINER_START_SCRIPT}
 
 echo -e "${YELLOW}\nCreating crontab to start miner at boot${RESET}"
-crontab -l ~/temp_cron
+crontab -l > ~/temp_cron
+echo -e "@reboot nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration" >> ~/temp_cron
 echo -e "@reboot sleep ${MINER_COOLDOWN} && screen -dmS claymore sh ${MINER_START_SCRIPT}" >> ~/temp_cron
 echo -e "@reboot sleep ${OVERCLOCK_COOLDOWN} && sh ${OVERCLOCK_START_SCRIPT}" >> ~/temp_cron
 crontab ~/temp_cron
