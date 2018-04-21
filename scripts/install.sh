@@ -2,10 +2,10 @@
 
 # Config
 CLAYMORE_MINER_GZIP='claymore_11.6_quickfix'
-CLAYMORE_DIR='~/claymore'
-OVERCLOCK_START_SCRIPT='~/overclock.sh'
-MINER_INSTALLER_DIR='~/miner-installer'
-MINER_START_SCRIPT='~/miner.sh'
+CLAYMORE_DIR=~/claymore
+OVERCLOCK_START_SCRIPT=~/overclock.sh
+MINER_INSTALLER_DIR=~/miner-installer
+MINER_START_SCRIPT=~/miner.sh
 MINER_COOLDOWN=15
 MINER_COOLDOWN=30
 WELCOME_MESSAGE="${CYAN}Welcome to the johnnyhuy/ubuntu-etheruem-miner installer${RESET}"
