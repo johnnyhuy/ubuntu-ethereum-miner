@@ -3,7 +3,7 @@ The following steps will guide you to setup an Ubuntu operating system. This wil
 
 ## Disclaimers
 
-I am not the creator of Claymore's Miner (miner zip stored in /miner/*.gz), this is an installation script to install an Nvidia miner.
+I am not the creator of Claymore's Miner (miner zip stored in /miner/*.gz), this is an installation guide to install an Nvidia miner.
 
 ## Automated Installation
 
