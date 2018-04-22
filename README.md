@@ -24,7 +24,7 @@ Be sure to have the following prerequisites:
 git clone --depth=1 https://github.com/johnnyhuy/ubuntu-ethereum-miner.git ~/miner-installer
 ```
 
-3. Run the install bash script
+3. Run the install bash script and follow the prompts
 
 ```
 cd ~ && sudo bash ~/miner-installer/scripts/install.sh
