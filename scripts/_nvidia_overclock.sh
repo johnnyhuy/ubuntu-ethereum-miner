@@ -15,7 +15,7 @@ CYAN='\033[0;36m'
 WHITE='\033[0;37m'
 
 touch $OVERCLOCK_START_SCRIPT
-echo -e"#!/bin/bash
+echo -e "#!/bin/bash
 
 if [[ \$EUID > 0 ]]; then
     echo -e \"\\033[0;31mPermission denied, please run this script in root/sudo\\033[0m\"
