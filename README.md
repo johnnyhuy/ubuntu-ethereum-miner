@@ -30,7 +30,9 @@ This script requires **root** to update/create files and configure Nvidia driver
     cd ~/miner-installer/scripts && sudo bash ./install.sh
     ```
 
-4. Unlock overclocking on Nvida drivers by running the following script **after reboot**.
+4. Edit miner settings at `~/miner.sh`
+
+5. Unlock overclocking on Nvida drivers by running the following script **after reboot**.
 
     ```shell
     cd ~/miner-installer/scripts && sudo bash ./nvidia_unlock_overclock.sh
@@ -43,6 +45,14 @@ Follow the manual method of installing the miner at `MANUAL_INSTALL.md` in this 
 ## Troubleshooting
 
 Here are some solutions to some issues/gotchas that may occur when setting up the system.
+
+### I cannot set my overclock settings to new GPUs installed
+
+You will need to run the Nvidia overclock unlock command again to detect new devices. Thankfully I've created that script here:
+
+```shell
+cd ~/miner-installer/scripts && sudo bash ./nvidia_unlock_overclock.sh
+```
 
 ### Reset files from installation script
 
