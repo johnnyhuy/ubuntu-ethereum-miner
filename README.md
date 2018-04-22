@@ -34,11 +34,11 @@ cd ~ && sudo bash ~/miner-installer/scripts/install.sh
 
 Follow the manual method of installing the miner at `MANUAL_INSTALL.md` in this repository.
 
-### Troubleshooting
+## Troubleshooting
 
 Here are some solutions to some issues/gotchas that may occur when setting up the system.
 
-#### Reset files from installation script
+### Reset files from installation script
 
 If you need a clean installation of files from the installation script, run the following command:
 
@@ -46,7 +46,7 @@ If you need a clean installation of files from the installation script, run the 
 cd ~ && sudo bash ./miner-installer/scripts/reset.sh
 ```
 
-#### How do I see if screen terminal is running
+### How do I see if screen terminal is running
 
 Run the following command to view all screen instances:
 
@@ -54,7 +54,7 @@ Run the following command to view all screen instances:
 screen -ls
 ```
 
-#### How do I view a screen instance
+### How do I view a screen instance
 
 To access a terminal instance from screen, run the following command:
 
@@ -66,13 +66,13 @@ Replace square brackets with relevant information.
 
 To exit out of an instance press `CTRL+A+D` to exit without closing the terminal instance.
 
-#### Wifi is not connecting at login
+### Wifi is not connecting at login
 
 Allow the network to be connected by all users. The UI method will need you to go your Network Manager and edit the connection to enable all users to connect to the network.
 
 [More info](https://askubuntu.com/questions/16376/connect-to-network-before-user-login)
 
-#### Failed to connect to Mir on GPU overclock
+### Failed to connect to Mir on GPU overclock
 
 When there is no Xorg server attached to the devices the following error appears when running `nvidia-settings` commands.
 
@@ -89,7 +89,7 @@ export DISPLAY=0
 export XAUTHORITY=/var/run/lightdm/root/:0
 ```
 
-### Sources
+## Sources
 
 Majority of the information I have found are referenced below:
 
