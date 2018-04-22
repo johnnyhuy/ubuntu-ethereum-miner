@@ -16,6 +16,10 @@ WHITE='\033[0;37m'
 
 touch $OVERCLOCK_START_SCRIPT
 echo -e"#!/bin/bash
+\nif [[ \$EUID > 0 ]]; then
+    echo -e \"\\033[0;31mPermission denied, please run this script in root/sudo\\033[0m\"
+    exit 1
+fi
 \nexport DISPLAY=0
 export XAUTHORITY=/var/run/lightdm/root/:0
 \n# Memory clock
