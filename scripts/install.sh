@@ -107,4 +107,5 @@ echo -e "${GREEN}\nInstallation complete, restarting in 5 seconds (manual reboot
 chown -R $USERNAME:$USERNAME $OVERCLOCK_START_SCRIPT
 chown -R $USERNAME:$USERNAME $MINER_START_SCRIPT
 
-sleep 5 reboot
+sleep 5
+reboot

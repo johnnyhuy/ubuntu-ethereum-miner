@@ -27,4 +27,5 @@ nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration
 
 echo -e "${GREEN}\nUnlock complete, restarting in 5 seconds (manual reboot if required)"
 
-sleep 5 reboot
+sleep 5
+reboot
