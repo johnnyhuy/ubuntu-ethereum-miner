@@ -69,7 +69,7 @@ echo -e "${YELLOW}\nDisabling nouveau${RESET}"
 bash "${MINER_INSTALLER_DIR}/scripts/_disable_nouveau.sh"
 
 echo -e "${YELLOW}\nCopying overclock template to ${OVERCLOCK_START_SCRIPT}${RESET}"
-bash "${MINER_INSTALLER_DIR}/scripts/_create_cron_job.sh" $MINER_COOLDOWN $MINER_START_SCRIPT $OVERCLOCK_COOLDOWN $OVERCLOCK_START_SCRIPT
+bash "${MINER_INSTALLER_DIR}/scripts/_nvidia_overclock.sh" $OVERCLOCK_START_SCRIPT
 
 echo -e "${YELLOW}\nInstalling Claymore Miner to ${CLAYMORE_DIR}${RESET}"
 bash "${MINER_INSTALLER_DIR}/scripts/_create_miner.sh" $MINER_INSTALLER_DIR $CLAYMORE_MINER_GZIP $CLAYMORE_DIR
@@ -80,7 +80,7 @@ touch $MINER_START_SCRIPT
 echo -e "#!/bin/bash\n${CLAYMORE_DIR}/ethdcrminer64 -epool [POOL] -ewal [ETH WALLET ADDR].[WORKER NAME]/[EMAIL] -epsw x -mode 1 -ftime 10" >> ${MINER_START_SCRIPT}
 
 echo -e "${YELLOW}\nCreating crontab to start miner at boot${RESET}"
-bash "${MINER_INSTALLER_DIR}/scripts/_create_cron_job.sh"
+bash "${MINER_INSTALLER_DIR}/scripts/_create_cron_job.sh" $MINER_COOLDOWN $MINER_START_SCRIPT $OVERCLOCK_COOLDOWN $OVERCLOCK_START_SCRIPT
 
 echo -e "${GREEN}\nInstallation complete, restarting in 5 seconds (manual reboot if required)${RESET}"
 
