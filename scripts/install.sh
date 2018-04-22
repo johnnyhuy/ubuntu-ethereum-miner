@@ -104,7 +104,9 @@ bash "${MINER_INSTALLER_DIR}/scripts/_create_cron_job.sh" $MINER_COOLDOWN $MINER
 
 echo -e "${GREEN}\nInstallation complete, restarting in 5 seconds (manual reboot if required)${RESET}"
 chown -R $USERNAME:$USERNAME $OVERCLOCK_START_SCRIPT
+chmod +x $OVERCLOCK_START_SCRIPT
 chown -R $USERNAME:$USERNAME $MINER_START_SCRIPT
+chmod +x $USERNAME $MINER_START_SCRIPT
 
 sleep 5
 reboot
