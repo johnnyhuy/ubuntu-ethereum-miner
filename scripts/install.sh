@@ -56,9 +56,8 @@ ${CYAN}2) ${YELLOW}Install Nvidia drivers: ${RESET}installs package nvidia-390
 ${CYAN}3) ${YELLOW}Unlock Nvidia overclock settings: ${RESET}runs nvidia-xconfig
 ${CYAN}4) ${YELLOW}Extract Claymore's Miner from ./miner-installer/miner and install at ~/claymore
 ${CYAN}5) ${YELLOW}Disable nouveau: ${RESET}adds config at /etc/modprobe.d/blacklist-nouveau.conf
-${CYAN}6) ${YELLOW}Create overclock script: ${RESET}added script at ./overclock.sh
-${CYAN}7) ${YELLOW}Create miner start script: ${RESET}added script at ./miner.sh
-${CYAN}8) ${YELLOW}Create cron job: ${RESET}starts miner and overclock at reboot\n"
+${CYAN}6) ${YELLOW}Create miner start script: ${RESET}added script at ./miner.sh
+${CYAN}7) ${YELLOW}Create cron job: ${RESET}starts miner and overclock at reboot\n"
 while :
 do
     read -e -n 1 -r -p "Confirm [y/N] " INPUT
@@ -80,35 +79,32 @@ add-apt-repository ppa:graphics-drivers/ppa -y
 apt-get update
 # apt-get upgrade -y
 
-echo -e "${CYAN}\n(1/8)${YELLOW} Installing Ubuntu utilities (git, vim etc.)${RESET}"
+echo -e "${CYAN}\n(1/7)${YELLOW} Installing Ubuntu utilities (git, vim etc.)${RESET}"
 apt-get install git vim screen openssh-server -y
 
-echo -e "${CYAN}\n(2/8)${YELLOW} Installing Nvidia drivers${RESET}"
+echo -e "${CYAN}\n(2/7)${YELLOW} Installing Nvidia drivers${RESET}"
 apt-get install nvidia-390 -y
 
-echo -e "${CYAN}\n(3/8)${YELLOW} Unlocking Nvidia overclock setting${RESET}"
+echo -e "${CYAN}\n(3/7)${YELLOW} Unlocking Nvidia overclock setting${RESET}"
 nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration
 
-echo -e "${CYAN}\n(4/8)${YELLOW} Disabling nouveau${RESET}"
+echo -e "${CYAN}\n(4/7)${YELLOW} Disabling nouveau${RESET}"
 bash "${MINER_INSTALLER_DIR}/scripts/_disable_nouveau.sh"
 
-echo -e "${CYAN}\n(5/8)${YELLOW} Copying overclock template to ${OVERCLOCK_START_SCRIPT}${RESET}"
-bash "${MINER_INSTALLER_DIR}/scripts/_nvidia_overclock.sh" $OVERCLOCK_START_SCRIPT
-
-echo -e "${CYAN}\n(6/8)${YELLOW} Installing Claymore Miner to ${CLAYMORE_DIR}${RESET}"
+echo -e "${CYAN}\n(5/7)${YELLOW} Installing Claymore Miner to ${CLAYMORE_DIR}${RESET}"
 bash "${MINER_INSTALLER_DIR}/scripts/_create_miner.sh" $MINER_INSTALLER_DIR $CLAYMORE_MINER_GZIP $CLAYMORE_DIR
 
-echo -e "${CYAN}\n(7/8)${YELLOW} Copying template miner start script${RESET}"
+echo -e "${CYAN}\n(6/7)${YELLOW} Copying template miner start script${RESET}"
 echo -e "${RED}Change to appropriate miner settings after you run this script${RESET}"
 echo -e "${RESET}Let's make that easy for you, run this: vim ~/miner.sh"
 touch $MINER_START_SCRIPT
 echo -e "#!/bin/bash\n${CLAYMORE_DIR}/ethdcrminer64 -epool [POOL] -ewal [ETH WALLET ADDR].[WORKER NAME]/[EMAIL] -epsw x -mode 1 -ftime 10" >> ${MINER_START_SCRIPT}
 
-echo -e "${CYAN}\n(8/8)${YELLOW} Creating crontab to start miner at boot${RESET}"
+echo -e "${CYAN}\n(7/7)${YELLOW} Creating crontab to start miner at boot${RESET}"
 bash "${MINER_INSTALLER_DIR}/scripts/_create_cron_job.sh" $MINER_COOLDOWN $MINER_START_SCRIPT $OVERCLOCK_COOLDOWN $OVERCLOCK_START_SCRIPT
 
 echo -e "${GREEN}\nInstallation complete, restarting in 5 seconds (manual reboot if required)${RESET}"
 chown -R $USERNAME:$USERNAME $OVERCLOCK_START_SCRIPT
 chown -R $USERNAME:$USERNAME $MINER_START_SCRIPT
 
-@sleep 5 reboot
+sleep 5 reboot

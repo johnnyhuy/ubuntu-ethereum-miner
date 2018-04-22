@@ -21,13 +21,19 @@ This script requires **root** to update/create files and configure Nvidia driver
 2. Get this Git repository
 
     ```shell
-    git clone --depth=1 https://github.com/johnnyhuy/ubuntu-ethereum-miner.git ~/miner-installer
+    cd ~ && git clone --depth=1 https://github.com/johnnyhuy/ubuntu-ethereum-miner.git ~/miner-installer
     ```
 
 3. Run the install bash script and follow the prompts
 
     ```shell
-    cd ~ && sudo bash ~/miner-installer/scripts/install.sh
+    cd ~/miner-installer/scripts && sudo bash ./install.sh
+    ```
+
+4. Unlock overclocking on Nvida drivers by running the following script **after reboot**.
+
+    ```shell
+    cd ~/miner-installer/scripts && sudo bash ./nvidia_unlock_overclock.sh
     ```
 
 ## Manual Installation
