@@ -20,7 +20,25 @@ if [[ $EUID > 0 ]]; then
 fi
 
 echo -e $WELCOME_MESSAGE
-echo -e "${YELLOW}Running this script in root/sudo${RESET}"
+echo -e "${YELLOW}Running this script in root/sudo\n${RESET}"
+
+read -e -p "Enter your username: " USERNAME
+while :
+do
+    read -e -n 1 -r -p "Confirm username is: ${USERNAME} [y/N] " INPUT
+    case $INPUT in
+        [yY])
+        break
+        ;;
+        [nN]|"")
+        echo -e "${RED}Installation aborted!${RESET}"
+        exit 1
+        ;;
+        *)
+        echo -e "${RED}Please choose y or n.${RESET}"
+        ;;
+    esac
+done
 
 echo -e "${GREEN}\nThis reset script will remove the following:
 /etc/modprobe.d/blacklist-nouveau.conf
@@ -44,4 +62,4 @@ do
     esac
 done
 
-rm -rdf /etc/modprobe.d/blacklist-nouveau.conf ./claymore/ ./miner.sh ./overclock.sh
+rm -rdf /etc/modprobe.d/blacklist-nouveau.conf /home/$USERNAME/claymore/ /home/$USERNAME/miner.sh /home/$USERNAME/overclock.sh
