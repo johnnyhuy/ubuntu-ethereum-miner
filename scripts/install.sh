@@ -80,6 +80,7 @@ bash "${MINER_INSTALLER_DIR}/scripts/_create_miner.sh" $MINER_INSTALLER_DIR $CLA
 
 echo -e "${CYAN}\n(7/8)${YELLOW} Copying template miner start script${RESET}"
 echo -e "${RED}Change to appropriate miner settings after you run this script${RESET}"
+echo -e "${RESET}Let's make that easy for you, run this: vim ~/miner.sh"
 touch $MINER_START_SCRIPT
 echo -e "#!/bin/bash\n${CLAYMORE_DIR}/ethdcrminer64 -epool [POOL] -ewal [ETH WALLET ADDR].[WORKER NAME]/[EMAIL] -epsw x -mode 1 -ftime 10" >> ${MINER_START_SCRIPT}
 
