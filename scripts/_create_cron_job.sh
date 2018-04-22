@@ -20,6 +20,8 @@ WHITE='\033[0;37m'
 crontab -l > ./temp_cron
 echo -e "@reboot nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration
 @reboot sleep ${MINER_COOLDOWN} && screen -dmS claymore sh ${MINER_START_SCRIPT}
-@reboot sleep ${OVERCLOCK_COOLDOWN} && sh ${OVERCLOCK_START_SCRIPT}" > ./temp_cron
+@reboot sleep ${OVERCLOCK_COOLDOWN} && sh ${OVERCLOCK_START_SCRIPT}
+
+0 */1 * * * shutdown -r" > ./temp_cron
 crontab ./temp_cron
 rm ./temp_cron
