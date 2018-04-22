@@ -97,8 +97,7 @@ bash "${MINER_INSTALLER_DIR}/scripts/_create_miner.sh" $MINER_INSTALLER_DIR $CLA
 echo -e "${CYAN}\n(6/7)${YELLOW} Copying template miner start script${RESET}"
 echo -e "${RED}Change to appropriate miner settings after you run this script${RESET}"
 echo -e "${RESET}Let's make that easy for you, run this: vim ~/miner.sh"
-touch $MINER_START_SCRIPT
-echo -e "#!/bin/bash\n${CLAYMORE_DIR}/ethdcrminer64 -epool [POOL] -ewal [ETH WALLET ADDR].[WORKER NAME]/[EMAIL] -epsw x -mode 1 -ftime 10" >> ${MINER_START_SCRIPT}
+bash "${MINER_INSTALLER_DIR}/scripts/_create_miner_start.sh" $MINER_START_SCRIPT $CLAYMORE_DIR
 
 echo -e "${CYAN}\n(7/7)${YELLOW} Creating crontab to start miner at boot${RESET}"
 bash "${MINER_INSTALLER_DIR}/scripts/_create_cron_job.sh" $MINER_COOLDOWN $MINER_START_SCRIPT $OVERCLOCK_COOLDOWN $OVERCLOCK_START_SCRIPT
