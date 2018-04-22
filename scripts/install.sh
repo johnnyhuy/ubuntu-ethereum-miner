@@ -53,10 +53,10 @@ MINER_START_SCRIPT=/home/$USERNAME/miner.sh
 echo -e "${GREEN}\nThis installation script will do the following:
 ${CYAN}1) ${YELLOW}Install Ubuntu utility packages: ${RESET}git vim screen openssh-server
 ${CYAN}2) ${YELLOW}Install Nvidia drivers: ${RESET}installs package nvidia-390
-${CYAN}3) ${YELLOW}Unlock Nvidia overclock settings: ${RESET}runs nvidia-xconfig
+${CYAN}3) ${YELLOW}Create Nvidia overclock script: ${RESET}adds script at ./overclock.sh
 ${CYAN}4) ${YELLOW}Extract Claymore's Miner from ./miner-installer/miner and install at ~/claymore
 ${CYAN}5) ${YELLOW}Disable nouveau: ${RESET}adds config at /etc/modprobe.d/blacklist-nouveau.conf
-${CYAN}6) ${YELLOW}Create miner start script: ${RESET}added script at ./miner.sh
+${CYAN}6) ${YELLOW}Create miner start script: ${RESET}adds script at ./miner.sh
 ${CYAN}7) ${YELLOW}Create cron job: ${RESET}starts miner and overclock at reboot\n"
 while :
 do
@@ -85,8 +85,8 @@ apt-get install git vim screen openssh-server -y
 echo -e "${CYAN}\n(2/7)${YELLOW} Installing Nvidia drivers${RESET}"
 apt-get install nvidia-390 -y
 
-echo -e "${CYAN}\n(3/7)${YELLOW} Unlocking Nvidia overclock setting${RESET}"
-nvidia-xconfig -a --cool-bits=28 --allow-empty-initial-configuration
+echo -e "${CYAN}\n(3/7)${YELLOW} Creating Nvidia overclock script${RESET}"
+bash "${MINER_INSTALLER_DIR}/scripts/_nvidia_overclock.sh" $OVERCLOCK_START_SCRIPT
 
 echo -e "${CYAN}\n(4/7)${YELLOW} Disabling nouveau${RESET}"
 bash "${MINER_INSTALLER_DIR}/scripts/_disable_nouveau.sh"
