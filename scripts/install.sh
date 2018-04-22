@@ -7,7 +7,7 @@ OVERCLOCK_START_SCRIPT=./overclock.sh
 MINER_INSTALLER_DIR=./miner-installer
 MINER_START_SCRIPT=./miner.sh
 MINER_COOLDOWN=15
-MINER_COOLDOWN=30
+OVERCLOCK_COOLDOWN=30
 WELCOME_MESSAGE="${CYAN}Welcome to the johnnyhuy/ubuntu-etheruem-miner installer${RESET}"
 
 # Colors
