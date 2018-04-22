@@ -22,7 +22,7 @@ if [[ \$EUID > 0 ]]; then
     exit 1
 fi
 
-export DISPLAY=0
+export DISPLAY=:0
 export XAUTHORITY=/var/run/lightdm/root/:0
 
 # Memory clock
