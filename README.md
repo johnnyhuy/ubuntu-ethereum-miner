@@ -13,22 +13,22 @@ This script requires **root** to update/create files and configure Nvidia driver
 
 1. Gain access to your Ubuntu instance
 
-Be sure to have the following prerequisites:
+    Be sure to have the following prerequisites:
 
-- Git installed
-- An Internet connection on the device
+    - Git installed
+    - An Internet connection on the device
 
 2. Get this Git repository
 
-```
-git clone --depth=1 https://github.com/johnnyhuy/ubuntu-ethereum-miner.git ~/miner-installer
-```
+    ```shell
+    git clone --depth=1 https://github.com/johnnyhuy/ubuntu-ethereum-miner.git ~/miner-installer
+    ```
 
 3. Run the install bash script and follow the prompts
 
-```
-cd ~ && sudo bash ~/miner-installer/scripts/install.sh
-```
+    ```shell
+    cd ~ && sudo bash ~/miner-installer/scripts/install.sh
+    ```
 
 ## Manual Installation
 
