@@ -1,15 +1,5 @@
 #!/bin/bash
 
-# Config
-CLAYMORE_MINER_GZIP='claymore_11.6_quickfix'
-CLAYMORE_DIR=./claymore
-OVERCLOCK_START_SCRIPT=./overclock.sh
-MINER_INSTALLER_DIR=./miner-installer
-MINER_START_SCRIPT=./miner.sh
-MINER_COOLDOWN=15
-OVERCLOCK_COOLDOWN=30
-WELCOME_MESSAGE="${CYAN}Welcome to the johnnyhuy/ubuntu-etheruem-miner installer${RESET}"
-
 # Colors
 RESET='\033[0m'
 BLACK='\033[0;30m'
@@ -20,6 +10,16 @@ BLUE='\033[0;34m'
 PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 WHITE='\033[0;37m'
+
+# Config
+CLAYMORE_MINER_GZIP='claymore_11.6_quickfix'
+CLAYMORE_DIR=./claymore
+OVERCLOCK_START_SCRIPT=./overclock.sh
+MINER_INSTALLER_DIR=./miner-installer
+MINER_START_SCRIPT=./miner.sh
+MINER_COOLDOWN=15
+OVERCLOCK_COOLDOWN=30
+WELCOME_MESSAGE="${CYAN}Welcome to the johnnyhuy/ubuntu-etheruem-miner installer${RESET}"
 
 if [[ $EUID > 0 ]]; then
     echo -e $WELCOME_MESSAGE
@@ -79,7 +79,7 @@ echo -e "${CYAN}\n(6/8)${YELLOW} Installing Claymore Miner to ${CLAYMORE_DIR}${R
 bash "${MINER_INSTALLER_DIR}/scripts/_create_miner.sh" $MINER_INSTALLER_DIR $CLAYMORE_MINER_GZIP $CLAYMORE_DIR
 
 echo -e "${CYAN}\n(7/8)${YELLOW} Copying template miner start script${RESET}"
-echo -e "${BLUE}Change to appropriate miner settings after you run this script${RESET}"
+echo -e "${RED}Change to appropriate miner settings after you run this script${RESET}"
 touch $MINER_START_SCRIPT
 echo -e "#!/bin/bash\n${CLAYMORE_DIR}/ethdcrminer64 -epool [POOL] -ewal [ETH WALLET ADDR].[WORKER NAME]/[EMAIL] -epsw x -mode 1 -ftime 10" >> ${MINER_START_SCRIPT}
 
