@@ -12,7 +12,7 @@ CYAN='\033[0;36m'
 WHITE='\033[0;37m'
 
 # Config
-CLAYMORE_MINER_GZIP='claymore_11.6_quickfix'
+CLAYMORE_MINER_GZIP='claymore_11.7'
 MINER_COOLDOWN=15
 OVERCLOCK_COOLDOWN=30
 WELCOME_MESSAGE="${CYAN}Welcome to the johnnyhuy/ubuntu-etheruem-miner installer${RESET}"
