@@ -104,7 +104,7 @@ bash "${MINER_INSTALLER_DIR}/scripts/_create_miner_start.sh" $MINER_START_SCRIPT
 echo -e "${CYAN}\n(7/8)${YELLOW} Creating crontab to start miner at boot${RESET}"
 bash "${MINER_INSTALLER_DIR}/scripts/_create_cron_job.sh" $MINER_COOLDOWN $MINER_START_SCRIPT $OVERCLOCK_COOLDOWN $OVERCLOCK_START_SCRIPT
 
-echo -e "{$CYAN}\n(8/8)"
+echo -e "${CYAN}\n(8/8)${YELLOW} Editing .bashrc file${RESET}"
 bash "${MINER_INSTALLER_DIR}/scripts/_edit_bashrc.sh" $USER_DIR
 
 echo -e "${GREEN}\nInstallation complete, restarting in 5 seconds (manual reboot if required)${RESET}"
