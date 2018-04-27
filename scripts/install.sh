@@ -45,10 +45,11 @@ do
 done
 
 # Directories
-CLAYMORE_DIR=/home/$USERNAME/claymore
-OVERCLOCK_START_SCRIPT=/home/$USERNAME/overclock.sh
-MINER_INSTALLER_DIR=/home/$USERNAME/miner-installer
-MINER_START_SCRIPT=/home/$USERNAME/miner.sh
+USER_DIR=/home/$USERNAME
+CLAYMORE_DIR=$USER_DIR/claymore
+OVERCLOCK_START_SCRIPT=$USER_DIR/overclock.sh
+MINER_INSTALLER_DIR=$USER_DIR/miner-installer
+MINER_START_SCRIPT=$USER_DIR/miner.sh
 
 echo -e "${GREEN}\nThis installation script will do the following:
 ${CYAN}1) ${YELLOW}Install Ubuntu utility packages: ${RESET}git vim screen openssh-server
@@ -57,7 +58,8 @@ ${CYAN}3) ${YELLOW}Create Nvidia overclock script: ${RESET}adds script at ./over
 ${CYAN}4) ${YELLOW}Extract Claymore's Miner from ./miner-installer/miner and install at ~/claymore
 ${CYAN}5) ${YELLOW}Disable nouveau: ${RESET}adds config at /etc/modprobe.d/blacklist-nouveau.conf
 ${CYAN}6) ${YELLOW}Create miner start script: ${RESET}adds script at ./miner.sh
-${CYAN}7) ${YELLOW}Create cron job: ${RESET}starts miner and overclock at reboot\n"
+${CYAN}7) ${YELLOW}Create cron job: ${RESET}starts miner and overclock at reboot
+${CYAN}8) ${YELLOW}Edit .bashrc: ${RESET} set xorg display to root\n"
 while :
 do
     read -e -n 1 -r -p "Confirm [y/N] " INPUT
@@ -79,28 +81,31 @@ add-apt-repository ppa:graphics-drivers/ppa -y
 apt-get update
 # apt-get upgrade -y
 
-echo -e "${CYAN}\n(1/7)${YELLOW} Installing Ubuntu utilities (git, vim etc.)${RESET}"
+echo -e "${CYAN}\n(1/8)${YELLOW} Installing Ubuntu utilities (git, vim etc.)${RESET}"
 apt-get install git vim screen openssh-server -y
 
-echo -e "${CYAN}\n(2/7)${YELLOW} Installing Nvidia drivers${RESET}"
+echo -e "${CYAN}\n(2/8)${YELLOW} Installing Nvidia drivers${RESET}"
 apt-get install nvidia-390 -y
 
-echo -e "${CYAN}\n(3/7)${YELLOW} Creating Nvidia overclock script${RESET}"
+echo -e "${CYAN}\n(3/8)${YELLOW} Creating Nvidia overclock script${RESET}"
 bash "${MINER_INSTALLER_DIR}/scripts/_nvidia_overclock.sh" $OVERCLOCK_START_SCRIPT
 
-echo -e "${CYAN}\n(4/7)${YELLOW} Disabling nouveau${RESET}"
+echo -e "${CYAN}\n(4/8)${YELLOW} Disabling nouveau${RESET}"
 bash "${MINER_INSTALLER_DIR}/scripts/_disable_nouveau.sh"
 
-echo -e "${CYAN}\n(5/7)${YELLOW} Installing Claymore Miner to ${CLAYMORE_DIR}${RESET}"
+echo -e "${CYAN}\n(5/8)${YELLOW} Installing Claymore Miner to ${CLAYMORE_DIR}${RESET}"
 bash "${MINER_INSTALLER_DIR}/scripts/_create_miner.sh" $MINER_INSTALLER_DIR $CLAYMORE_MINER_GZIP $CLAYMORE_DIR
 
-echo -e "${CYAN}\n(6/7)${YELLOW} Copying template miner start script${RESET}"
+echo -e "${CYAN}\n(6/8)${YELLOW} Copying template miner start script${RESET}"
 echo -e "${RED}Change to appropriate miner settings after you run this script${RESET}"
 echo -e "${RESET}Let's make that easy for you, run this: vim ~/miner.sh"
 bash "${MINER_INSTALLER_DIR}/scripts/_create_miner_start.sh" $MINER_START_SCRIPT $CLAYMORE_DIR
 
-echo -e "${CYAN}\n(7/7)${YELLOW} Creating crontab to start miner at boot${RESET}"
+echo -e "${CYAN}\n(7/8)${YELLOW} Creating crontab to start miner at boot${RESET}"
 bash "${MINER_INSTALLER_DIR}/scripts/_create_cron_job.sh" $MINER_COOLDOWN $MINER_START_SCRIPT $OVERCLOCK_COOLDOWN $OVERCLOCK_START_SCRIPT
+
+echo -e "{$CYAN}\n(8/8)"
+bash "${MINER_INSTALLER_DIR}/scripts/_edit_bashrc.sh" $USER_DIR
 
 echo -e "${GREEN}\nInstallation complete, restarting in 5 seconds (manual reboot if required)${RESET}"
 chown -R $USERNAME:$USERNAME $OVERCLOCK_START_SCRIPT
