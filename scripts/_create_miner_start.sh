@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MINER_START_SCRIPT=$1
-CLAYMORE_DIR=$2
+MINER_DIR=$2
 
 touch $MINER_START_SCRIPT
 echo -e "#!/bin/bash
@@ -12,5 +12,6 @@ export GPU_USE_SYNC_OBJECTS=1
 export GPU_MAX_ALLOC_PERCENT=100
 export GPU_SINGLE_ALLOC_PERCENT=100
 
-${CLAYMORE_DIR}/ethdcrminer64 -epool [POOL] -ewal [ETH WALLET ADDR].[WORKER NAME]/[EMAIL] -epsw x -mode 1 -ftime 10
+${MINER_DIR}/ethminer --farm-recheck 200 -U -RH -SE [MINER_EMAIL] -P stratum1+tcp://[ETH_WALLET_ADDR].[WORKER_NAME]@[POOL]
+
 " > ${MINER_START_SCRIPT}

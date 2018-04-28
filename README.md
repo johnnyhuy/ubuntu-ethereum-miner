@@ -9,7 +9,27 @@ This is an installation guide to install an Nvidia miner and I will not be respo
 
 ## Automated Installation
 
-This script requires **root** to update/create files and configure Nvidia drivers. This method also assumes that you have a **fresh** installation of Ubuntu LTS.
+Please feel free to inspect/modify the script to suit your configuration.
+
+### Prerequisites
+
+- Root access
+- Fresh installation of Ubuntu LTS
+
+### What does it do
+
+1. **Install Ubuntu utility packages:** git vim screen openssh-server
+2. **Install Nvidia drivers:** installs package nvidia-390
+3. **Create Nvidia overclock script:** adds script at ~/overclock.sh
+4. **Extract Eth Miner:** from ~/miner-installer/miner and install at ~/ethminer
+5. **Disable nouveau:** adds config at /etc/modprobe.d/blacklist-nouveau.conf
+6. **Create miner start script:** adds a start mining script at ~/miner.sh
+7. **Create cron job:** starts miner and overclock at reboot
+8. **Edit .bashrc:**  set xorg display to root
+
+The installation script requires you to input your username since all files related to the miner are stored in the user home directory.
+
+### Instructions
 
 1. Gain access to your Ubuntu instance
 

@@ -12,7 +12,7 @@ CYAN='\033[0;36m'
 WHITE='\033[0;37m'
 
 # Config
-CLAYMORE_MINER_GZIP='claymore_11.7'
+MINER_GZIP='ethminer_0_14'
 MINER_COOLDOWN=15
 OVERCLOCK_COOLDOWN=30
 WELCOME_MESSAGE="${CYAN}Welcome to the johnnyhuy/ubuntu-etheruem-miner installer${RESET}"
@@ -46,7 +46,7 @@ done
 
 # Directories
 USER_DIR=/home/$USERNAME
-CLAYMORE_DIR=$USER_DIR/claymore
+MINER_DIR=$USER_DIR/ethminer
 OVERCLOCK_START_SCRIPT=$USER_DIR/overclock.sh
 MINER_INSTALLER_DIR=$USER_DIR/miner-installer
 MINER_START_SCRIPT=$USER_DIR/miner.sh
@@ -54,10 +54,10 @@ MINER_START_SCRIPT=$USER_DIR/miner.sh
 echo -e "${GREEN}\nThis installation script will do the following:
 ${CYAN}1) ${YELLOW}Install Ubuntu utility packages: ${RESET}git vim screen openssh-server
 ${CYAN}2) ${YELLOW}Install Nvidia drivers: ${RESET}installs package nvidia-390
-${CYAN}3) ${YELLOW}Create Nvidia overclock script: ${RESET}adds script at ./overclock.sh
-${CYAN}4) ${YELLOW}Extract Claymore's Miner from ./miner-installer/miner and install at ~/claymore
+${CYAN}3) ${YELLOW}Create Nvidia overclock script: ${RESET}adds script at ~/overclock.sh
+${CYAN}4) ${YELLOW}Extract Eth Miner:${RESET} from ~/miner-installer/miner and install at ~/ethminer
 ${CYAN}5) ${YELLOW}Disable nouveau: ${RESET}adds config at /etc/modprobe.d/blacklist-nouveau.conf
-${CYAN}6) ${YELLOW}Create miner start script: ${RESET}adds script at ./miner.sh
+${CYAN}6) ${YELLOW}Create miner start script: ${RESET}adds a start mining script at ~/miner.sh
 ${CYAN}7) ${YELLOW}Create cron job: ${RESET}starts miner and overclock at reboot
 ${CYAN}8) ${YELLOW}Edit .bashrc: ${RESET} set xorg display to root\n"
 while :
@@ -93,13 +93,13 @@ bash "${MINER_INSTALLER_DIR}/scripts/_nvidia_overclock.sh" $OVERCLOCK_START_SCRI
 echo -e "${CYAN}\n(4/8)${YELLOW} Disabling nouveau${RESET}"
 bash "${MINER_INSTALLER_DIR}/scripts/_disable_nouveau.sh"
 
-echo -e "${CYAN}\n(5/8)${YELLOW} Installing Claymore Miner to ${CLAYMORE_DIR}${RESET}"
-bash "${MINER_INSTALLER_DIR}/scripts/_create_miner.sh" $MINER_INSTALLER_DIR $CLAYMORE_MINER_GZIP $CLAYMORE_DIR
+echo -e "${CYAN}\n(5/8)${YELLOW} Installing Eth Miner to ${MINER_DIR}${RESET}"
+bash "${MINER_INSTALLER_DIR}/scripts/_create_miner.sh" $MINER_INSTALLER_DIR $MINER_GZIP $MINER_DIR
 
 echo -e "${CYAN}\n(6/8)${YELLOW} Copying template miner start script${RESET}"
 echo -e "${RED}Change to appropriate miner settings after you run this script${RESET}"
 echo -e "${RESET}Let's make that easy for you, run this: vim ~/miner.sh"
-bash "${MINER_INSTALLER_DIR}/scripts/_create_miner_start.sh" $MINER_START_SCRIPT $CLAYMORE_DIR
+bash "${MINER_INSTALLER_DIR}/scripts/_create_miner_start.sh" $MINER_START_SCRIPT $MINER_DIR
 
 echo -e "${CYAN}\n(7/8)${YELLOW} Creating crontab to start miner at boot${RESET}"
 bash "${MINER_INSTALLER_DIR}/scripts/_create_cron_job.sh" $MINER_COOLDOWN $MINER_START_SCRIPT $OVERCLOCK_COOLDOWN $OVERCLOCK_START_SCRIPT

@@ -2,8 +2,8 @@
 
 # Config
 MINER_INSTALLER_DIR=$1
-CLAYMORE_MINER_GZIP=$2
-CLAYMORE_DIR=$3
+MINER_GZIP=$2
+MINER_DIR=$3
 
-mkdir -p $CLAYMORE_DIR
-tar xvzf "${MINER_INSTALLER_DIR}/miner/${CLAYMORE_MINER_GZIP}.gz" -C $CLAYMORE_DIR --strip-components 1
+mkdir -p $MINER_DIR
+tar xvzf "${MINER_INSTALLER_DIR}/miner/${MINER_GZIP}.gz" -C $MINER_DIR --strip-components 1
