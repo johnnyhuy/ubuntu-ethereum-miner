@@ -66,6 +66,23 @@ Follow the manual method of installing the miner at `MANUAL_INSTALL.md` in this 
 
 Here are some solutions to some issues/gotchas that may occur when setting up the system.
 
+### Black screen when at boot after running overlock unlock script
+
+Since the script overrides `/etc/X11/xorg.conf` the screen layout may default to a different device (GPU). After you have finialised your GPU setup, edit the `/etc/X11/xorg.conf` config file to set it back to the intended GPU.
+
+Here's an example of two GPUs installed where Screen1 is the device I want to use. Note that the two zeros on the end are needed to fill in all the parameters of the config.
+
+```shell
+Section "ServerLayout"
+    Identifier     "Layout0"
+    Screen      1  "Screen1" 0 0
+    #Screen      0  "Screen0" 0 0
+    #Screen      1  "Screen1" RightOf "Screen0"
+    InputDevice    "Keyboard0" "CoreKeyboard"
+    InputDevice    "Mouse0" "CorePointer"
+EndSection
+```
+
 ### I cannot set my overclock settings to new GPUs installed
 
 You will need to run the Nvidia overclock unlock command again to detect new devices. Thankfully I've created that script here:
