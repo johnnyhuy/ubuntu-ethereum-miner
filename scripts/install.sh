@@ -13,8 +13,8 @@ WHITE='\033[0;37m'
 
 # Config
 MINER_GZIP='ethminer_0_14'
-MINER_COOLDOWN=15
-OVERCLOCK_COOLDOWN=30
+MINER_COOLDOWN=30
+OVERCLOCK_COOLDOWN=40
 WELCOME_MESSAGE="${CYAN}Welcome to the johnnyhuy/ubuntu-etheruem-miner installer${RESET}"
 
 if [[ $EUID > 0 ]]; then
