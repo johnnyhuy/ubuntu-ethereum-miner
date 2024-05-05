@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ubuntu-ethereum-miner
+  title: Ubuntu Ethereum Miner
+  description: An Ethereum miner running on Ubuntu
+  tags:
+    - ethereum
+spec:
+  type: library
+  lifecycle: experimental
+  owner: johnnyhuy
